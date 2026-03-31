@@ -2,7 +2,7 @@
 
 zkReveal builds infrastructure for encrypted digital delivery and private access.
 
-We are designing minimal, composable primitives that let applications enforce delivery and settlement on-chain while keeping encryption, validation, and user experience off-chain.
+Our current protocol direction is **Reveal Protocol** — a minimal, composable primitive for enforcing digital delivery and settlement on-chain while keeping encryption, validation, and user experience off-chain.
 
 ## What we build
 
@@ -27,6 +27,7 @@ We believe encrypted digital delivery should be:
 
 Our current work is centered on:
 
+- **Reveal Protocol** as the core encrypted delivery primitive
 - smart contract infrastructure for encrypted delivery escrow
 - Arbitrum-based deployment and iteration
 - off-chain encryption and delivery flows for integrators
@@ -34,7 +35,7 @@ Our current work is centered on:
 
 ## Repositories
 
-- [`contracts`](https://github.com/zkreveal/contracts) — Solidity + Foundry implementation of the zkReveal encrypted delivery escrow primitive
+- [`contracts`](https://github.com/zkreveal/contracts) — Solidity + Foundry implementation of **Reveal Protocol**, the current zkReveal encrypted delivery escrow primitive
 
 More repositories may include SDKs, apps, docs, and integration tooling as the system evolves.
 
@@ -43,6 +44,7 @@ More repositories may include SDKs, apps, docs, and integration tooling as the s
 zkReveal is currently in an early-stage, infrastructure-first phase.
 
 The current contract design is a pragmatic v0 model focused on:
+
 - time-bound escrow
 - encrypted delivery hooks
 - on-chain enforcement of settlement conditions
