@@ -2,47 +2,49 @@
 
 **zkReveal builds on-chain receipt and settlement infrastructure for digital sellers.**
 
-The current project focus is **Reveal Receipt Mode** — a minimal USDC-based payment and receipt primitive for seller-issued checkout flows, private payment links, Telegram bots, gated access, and digital commerce.
+The current focus is **Reveal Receipt Mode** — a minimal USDC-based primitive for seller-issued checkout flows, payment links, bots, and private digital commerce.
 
-Instead of trying to verify delivery on-chain, Receipt Mode focuses on a narrower v1 promise:
+Instead of trying to verify delivery on-chain, Receipt Mode focuses on a simpler, practical promise:
 
-> A buyer pays, settlement happens immediately, and an on-chain receipt is created for seller systems, bots, dashboards, and indexers to verify.
+> A buyer pays, settlement happens immediately, and an on-chain receipt is created.
 
-Receipt Mode is a proof-of-payment and settlement primitive. It is not an escrow or delivery-verification system.
+That receipt becomes the source of truth for seller systems, bots, dashboards, and indexers.
+
+Receipt Mode is a **payment and receipt layer**, not an escrow or delivery-verification system.
 
 ---
 
 ## What we build
 
-zkReveal focuses on infrastructure for flows such as:
+zkReveal provides infrastructure for:
 
 - seller-issued payment links
-- USDC checkout for digital products
+- crypto checkout for digital products
 - on-chain proof-of-payment receipts
-- Telegram bot commerce
+- Telegram-native commerce flows
 - private access and credential sales
-- gated communities and digital fulfillment
-- composable purchase and settlement primitives
-- future encrypted delivery and reveal workflows
+- gated content and memberships
+- composable settlement primitives for apps and marketplaces
 
-The current v1 contract is intentionally small: sellers create listings, buyers purchase receipts, and seller systems fulfill off-chain after verifying the receipt.
+The v1 contract is intentionally minimal:
+sellers create listings → buyers purchase → receipts are emitted → fulfillment happens off-chain.
 
 ---
 
 ## Current focus
 
-Our current work is centered on:
+We are currently focused on:
 
 - **Reveal Receipt Mode** as the first production primitive
 - Solidity + Foundry smart contracts
-- Arbitrum-based deployment and iteration
+- Arbitrum-based deployment
 - USDC settlement
 - seller-scoped purchase references
-- seller-authorized signed quotes using EIP-712
-- event/indexer-friendly receipt infrastructure
-- Telegram bot and lightweight seller checkout flows
+- EIP-712 signed quotes for dynamic checkout
+- event-driven, indexer-friendly design
+- lightweight seller flows (bots, dashboards, payment links)
 
-This is the practical first layer before expanding into stronger encrypted delivery, reveal, escrow, or dispute models.
+This is the first layer — not the final system.
 
 ---
 
@@ -50,46 +52,53 @@ This is the practical first layer before expanding into stronger encrypted deliv
 
 At a high level:
 
-1. A seller creates a listing with opaque metadata.
-2. The seller or backend creates a purchase reference.
-3. A buyer pays in USDC.
-4. The contract emits and stores an on-chain receipt.
-5. Seller systems verify the receipt and fulfill off-chain.
+1. Seller creates a listing (opaque metadata).
+2. Seller/backend generates a purchase reference.
+3. Buyer pays in USDC.
+4. Contract records an on-chain receipt.
+5. Seller systems observe the event and fulfill off-chain.
 
-For production checkout/payment-link flows, signed quotes are recommended.
+For real-world checkout flows, **signed quotes** are used.
 
 Signed quotes bind:
 
 - buyer
-- listing
 - seller
+- listing
 - amount
 - purchase reference
 - metadata hash
 - settlement token
 - expiry
-- chain
-- contract
+- chain + contract
 
-This makes them suitable for Telegram bots, private checkout links, seller-issued orders, dynamic pricing, and integrator-fee flows.
+This enables:
+
+- private payment links
+- Telegram bot flows
+- dynamic pricing
+- integrator fees
+- seller-controlled checkout logic
 
 ---
 
-## What Receipt Mode does not do
+## What Receipt Mode does NOT do
 
-Receipt Mode does **not** verify:
+Receipt Mode does not attempt to verify:
 
 - delivery
 - content correctness
 - access provisioning
+- refunds or disputes
 - product quality
-- refunds
-- disputes
-- whether the seller actually fulfilled the order
 
-Seller systems, bots, dashboards, or off-chain workflows are responsible for fulfillment after seeing a valid receipt.
+It does one thing:
 
-This is an intentional v1 design choice. zkReveal starts with a narrow, useful settlement primitive instead of pretending to solve every trust problem on-chain.
+> record payment and settlement on-chain.
+
+Everything else happens off-chain.
+
+This is an intentional design choice.
 
 ---
 
@@ -97,12 +106,12 @@ This is an intentional v1 design choice. zkReveal starts with a narrow, useful s
 
 We believe digital commerce infrastructure should be:
 
-- **minimal** — narrow, well-scoped primitives instead of bloated systems
-- **composable** — easy to integrate into marketplaces, bots, APIs, and apps
-- **honest about trust assumptions** — clear boundaries over fake decentralization
-- **seller-friendly** — practical for real sellers, not only protocol theorists
-- **indexer-friendly** — useful events and receipts for apps and dashboards
-- **upgradeable by architecture, not admin magic** — simple v1 contracts with clear future paths
+- **minimal** — focused primitives, not bloated systems
+- **composable** — usable inside apps, bots, APIs, and marketplaces
+- **honest** — clear trust boundaries instead of fake decentralization
+- **seller-first** — built for real sellers and real flows
+- **event-driven** — easy to integrate via indexers and listeners
+- **extensible** — evolve through new primitives, not complex upgrades
 
 ---
 
@@ -110,24 +119,24 @@ We believe digital commerce infrastructure should be:
 
 - **contracts** — Solidity + Foundry implementation of Reveal Receipt Mode
 
-More repositories may include SDKs, bots, apps, docs, and integration tooling as the system evolves.
+Additional repos (SDKs, bots, apps, tooling) will follow.
 
 ---
 
 ## Status
 
-zkReveal is currently in an early-stage, infrastructure-first phase.
+zkReveal is in an early-stage, infrastructure-first phase.
 
-The current contract design is a pragmatic v1 focused on:
+Current capabilities:
 
 - immediate USDC settlement
 - seller-owned listings
 - seller-scoped purchase references
 - EIP-712 signed receipt quotes
-- on-chain purchase receipts
-- off-chain fulfillment by seller systems
+- on-chain receipt records
+- off-chain fulfillment
 
-It is not yet a full marketplace, escrow protocol, dispute system, or fully trustless delivery-verification layer.
+It is **not** a marketplace, escrow protocol, or dispute system.
 
 ---
 
@@ -136,40 +145,40 @@ It is not yet a full marketplace, escrow protocol, dispute system, or fully trus
 zkReveal may expand toward:
 
 - encrypted delivery flows
-- buyer-verifiable reveal workflows
+- buyer-verifiable reveal mechanisms
 - escrow-based settlement modes
-- Telegram-native digital commerce
-- SDKs for marketplaces and apps
+- Telegram-native commerce systems
+- SDKs for apps and marketplaces
 - cross-chain payment entry
-- stronger off-chain/on-chain fulfillment guarantees
+- stronger fulfillment guarantees
 
-The long-term vision is to become foundational infrastructure for digital commerce where payments, receipts, access, and fulfillment can be composed across apps.
+But only after the core primitive proves itself.
 
 ---
 
 ## Vision
 
-zkReveal aims to become a lightweight settlement and receipt layer for internet-native digital commerce:
+zkReveal aims to become a foundational layer for digital commerce:
 
 - creators selling private content
-- sellers delivering credentials or access
+- sellers delivering credentials and access
 - apps monetizing gated resources
-- Telegram communities selling memberships
+- communities selling memberships
 - marketplaces embedding crypto-native checkout
-- agents purchasing digital resources from other systems
+- agents purchasing digital resources
 
 The first step is simple:
 
-> reliable on-chain receipts for seller-issued digital payments.
+> reliable on-chain receipts for digital payments.
 
 ---
 
 ## Contact
 
-For collaboration, integrations, or ecosystem discussions, open an issue in the relevant repository or reach out through the project’s public channels as they become available.
+Open an issue in the relevant repository or reach out through project channels as they become available.
 
 ---
 
 ## License
 
-Each repository contains its own license. See the individual repository for details.
+Each repository contains its own license.
