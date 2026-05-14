@@ -2,11 +2,11 @@
 
 zkReveal builds on-chain receipt and settlement infrastructure for digital sellers.
 
-The current focus is **Reveal Receipt Mode** — a minimal USDC-based primitive for seller-issued checkout flows, payment links, bots, and private digital commerce.
+The current focus is **Reveal Receipt Mode** — a minimal USDC-based primitive for seller-issued checkout flows, payment links, agents, and private digital commerce.
 
 A buyer pays, settlement happens immediately, and an on-chain receipt is created.
 
-That receipt becomes the source of truth for seller systems, Telegram bots, dashboards, apps, and indexers.
+That receipt becomes the source of truth for seller systems, agents, dashboards, apps, and indexers.
 
 Receipt Mode is a **payment and receipt layer** — not a marketplace or escrow protocol.
 
@@ -19,7 +19,7 @@ zkReveal provides infrastructure for:
 - seller-issued payment links
 - crypto checkout for digital products
 - on-chain proof-of-payment receipts
-- Telegram-native commerce flows
+- agentic and Telegram-native commerce flows
 - private access and credential sales
 - gated content and memberships
 - composable settlement primitives for apps and marketplaces
@@ -49,7 +49,7 @@ The current stack focuses on:
 - seller-scoped purchase references
 - EIP-712 signed quotes for dynamic checkout
 - event-driven, indexer-friendly design
-- lightweight seller flows through bots, dashboards, and payment links
+- lightweight seller flows through agents, dashboards, payment links, and Telegram interfaces
 
 This is the first layer — not the final system.
 
@@ -74,7 +74,7 @@ Signed quotes bind:
 This enables:
 
 - private payment links
-- Telegram bot checkout
+- agent-assisted and Telegram-native checkout
 - dynamic pricing
 - integrator fees
 - seller-controlled checkout logic
@@ -85,7 +85,7 @@ This enables:
 
 Reveal Receipt Mode records payment, settlement, and receipt creation on-chain.
 
-Fulfillment happens off-chain through seller systems, bots, dashboards, APIs, or applications.
+Fulfillment happens off-chain through seller systems, agents, dashboards, APIs, or applications.
 
 This keeps the v1 primitive simple, composable, and honest about its trust boundaries.
 
@@ -98,7 +98,7 @@ zkReveal does not try to force every part of digital commerce on-chain. Instead,
 zkReveal is built around a few principles:
 
 - **minimal** — focused primitives, not bloated systems
-- **composable** — usable inside apps, bots, APIs, and marketplaces
+- **composable** — usable inside apps, agents, APIs, and marketplaces
 - **honest** — clear trust boundaries instead of fake decentralization
 - **seller-first** — built for real sellers and real checkout flows
 - **event-driven** — easy to integrate through indexers and listeners
@@ -110,7 +110,7 @@ zkReveal is built around a few principles:
 
 - **contracts** — Solidity + Foundry implementation of Reveal Receipt Mode
 
-Additional repositories for SDKs, bots, apps, and tooling may follow.
+Additional repositories for SDKs, agents, apps, and tooling may follow.
 
 ---
 
@@ -138,7 +138,7 @@ After the core receipt primitive proves itself, zkReveal may expand toward:
 - encrypted delivery flows
 - buyer-verifiable reveal mechanisms
 - escrow-based settlement modes
-- Telegram-native commerce systems
+- agentic and Telegram-native commerce systems
 - SDKs for apps and marketplaces
 - cross-chain payment entry
 - stronger fulfillment guarantees
