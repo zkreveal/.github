@@ -1,20 +1,18 @@
 # zkReveal
 
-**zkReveal builds on-chain receipt and settlement infrastructure for digital sellers.**
+zkReveal builds on-chain receipt and settlement infrastructure for digital sellers.
 
 The current focus is **Reveal Receipt Mode** — a minimal USDC-based primitive for seller-issued checkout flows, payment links, bots, and private digital commerce.
 
-Instead of trying to verify delivery on-chain, Receipt Mode focuses on a simpler, practical promise:
+A buyer pays, settlement happens immediately, and an on-chain receipt is created.
 
-> A buyer pays, settlement happens immediately, and an on-chain receipt is created.
+That receipt becomes the source of truth for seller systems, Telegram bots, dashboards, apps, and indexers.
 
-That receipt becomes the source of truth for seller systems, bots, dashboards, and indexers.
-
-Receipt Mode is a **payment and receipt layer**, not an escrow or delivery-verification system.
+Receipt Mode is a **payment and receipt layer** — not a marketplace or escrow protocol.
 
 ---
 
-## What we build
+## What zkReveal enables
 
 zkReveal provides infrastructure for:
 
@@ -26,39 +24,40 @@ zkReveal provides infrastructure for:
 - gated content and memberships
 - composable settlement primitives for apps and marketplaces
 
-The v1 contract is intentionally minimal:
-sellers create listings → buyers purchase → receipts are emitted → fulfillment happens off-chain.
+The v1 flow is intentionally simple:
+
+```text
+seller creates listing
+→ seller/backend generates purchase reference
+→ buyer pays in USDC
+→ contract records receipt
+→ seller system fulfills off-chain
+```
 
 ---
 
 ## Current focus
 
-We are currently focused on:
+We are currently building **Reveal Receipt Mode** as the first production primitive.
 
-- **Reveal Receipt Mode** as the first production primitive
+The current stack focuses on:
+
 - Solidity + Foundry smart contracts
 - Arbitrum-based deployment
 - USDC settlement
+- seller-owned listings
 - seller-scoped purchase references
 - EIP-712 signed quotes for dynamic checkout
 - event-driven, indexer-friendly design
-- lightweight seller flows (bots, dashboards, payment links)
+- lightweight seller flows through bots, dashboards, and payment links
 
 This is the first layer — not the final system.
 
 ---
 
-## How Receipt Mode works
+## Signed checkout quotes
 
-At a high level:
-
-1. Seller creates a listing (opaque metadata).
-2. Seller/backend generates a purchase reference.
-3. Buyer pays in USDC.
-4. Contract records an on-chain receipt.
-5. Seller systems observe the event and fulfill off-chain.
-
-For real-world checkout flows, **signed quotes** are used.
+For real-world checkout flows, Receipt Mode supports EIP-712 signed quotes.
 
 Signed quotes bind:
 
@@ -70,48 +69,40 @@ Signed quotes bind:
 - metadata hash
 - settlement token
 - expiry
-- chain + contract
+- chain and contract
 
 This enables:
 
 - private payment links
-- Telegram bot flows
+- Telegram bot checkout
 - dynamic pricing
 - integrator fees
 - seller-controlled checkout logic
 
 ---
 
-## What Receipt Mode does NOT do
+## Scope
 
-Receipt Mode does not attempt to verify:
+Reveal Receipt Mode records payment, settlement, and receipt creation on-chain.
 
-- delivery
-- content correctness
-- access provisioning
-- refunds or disputes
-- product quality
+Fulfillment happens off-chain through seller systems, bots, dashboards, APIs, or applications.
 
-It does one thing:
+This keeps the v1 primitive simple, composable, and honest about its trust boundaries.
 
-> record payment and settlement on-chain.
-
-Everything else happens off-chain.
-
-This is an intentional design choice.
+zkReveal does not try to force every part of digital commerce on-chain. Instead, it provides a reliable receipt layer that other systems can build on.
 
 ---
 
 ## Design philosophy
 
-We believe digital commerce infrastructure should be:
+zkReveal is built around a few principles:
 
 - **minimal** — focused primitives, not bloated systems
 - **composable** — usable inside apps, bots, APIs, and marketplaces
 - **honest** — clear trust boundaries instead of fake decentralization
-- **seller-first** — built for real sellers and real flows
-- **event-driven** — easy to integrate via indexers and listeners
-- **extensible** — evolve through new primitives, not complex upgrades
+- **seller-first** — built for real sellers and real checkout flows
+- **event-driven** — easy to integrate through indexers and listeners
+- **extensible** — new primitives over complex upgrades
 
 ---
 
@@ -119,7 +110,7 @@ We believe digital commerce infrastructure should be:
 
 - **contracts** — Solidity + Foundry implementation of Reveal Receipt Mode
 
-Additional repos (SDKs, bots, apps, tooling) will follow.
+Additional repositories for SDKs, bots, apps, and tooling may follow.
 
 ---
 
@@ -127,7 +118,7 @@ Additional repos (SDKs, bots, apps, tooling) will follow.
 
 zkReveal is in an early-stage, infrastructure-first phase.
 
-Current capabilities:
+Current capabilities include:
 
 - immediate USDC settlement
 - seller-owned listings
@@ -136,13 +127,13 @@ Current capabilities:
 - on-chain receipt records
 - off-chain fulfillment
 
-It is **not** a marketplace, escrow protocol, or dispute system.
+zkReveal is not currently a marketplace, escrow protocol, or dispute system.
 
 ---
 
 ## Future direction
 
-zkReveal may expand toward:
+After the core receipt primitive proves itself, zkReveal may expand toward:
 
 - encrypted delivery flows
 - buyer-verifiable reveal mechanisms
@@ -152,13 +143,13 @@ zkReveal may expand toward:
 - cross-chain payment entry
 - stronger fulfillment guarantees
 
-But only after the core primitive proves itself.
+The long-term goal is to become a foundational payment and receipt layer for digital commerce.
 
 ---
 
 ## Vision
 
-zkReveal aims to become a foundational layer for digital commerce:
+zkReveal is designed for:
 
 - creators selling private content
 - sellers delivering credentials and access
@@ -169,7 +160,7 @@ zkReveal aims to become a foundational layer for digital commerce:
 
 The first step is simple:
 
-> reliable on-chain receipts for digital payments.
+**reliable on-chain receipts for digital payments.**
 
 ---
 
